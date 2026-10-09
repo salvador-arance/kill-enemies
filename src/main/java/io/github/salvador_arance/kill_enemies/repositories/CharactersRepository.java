@@ -11,67 +11,67 @@ public class CharactersRepository {
 	private static final int ENEMY_COUNT = 5;
 	private static final int FRIEND_COUNT = 5;
 	private ArrayList<Character> characters;
-	
+
 	public CharactersRepository() {
 		this.setCharacters(new ArrayList<Character>());
 		addEnemies();
 		addFriends();
 		shuffle();
 	}
-	
+
 	private void addEnemies() {
 		for (int i = 0; i < ENEMY_COUNT; i++) {
 			this.getCharacters().add(new Enemy());
 		}
 	}
-	
+
 	private void addFriends() {
-		for (int i= 0; i < FRIEND_COUNT; i++) {
+		for (int i = 0; i < FRIEND_COUNT; i++) {
 			this.getCharacters().add(new Friend());
 		}
 	}
-	
+
 	private void shuffle() {
 		Collections.shuffle(getCharacters());
 	}
-	
+
 	public void showCharacters() {
 		int characterIndex = 0;
-		
-		for (Character c: this.getCharacters()) {
-			++ characterIndex;
+
+		for (Character c : this.getCharacters()) {
+			++characterIndex;
 			System.out.println("Personaje " + characterIndex + ": " + c.toString());
 		}
 	}
-	
+
 	public int enemyCount() {
 		int enemyCount = 0;
-		for (Character c: this.getCharacters()) {
+		for (Character c : this.getCharacters()) {
 			if (c.isEnemy()) {
-				enemyCount ++;
+				enemyCount++;
 			}
 		}
 		return enemyCount;
 	}
-	
+
 	public int friendCount() {
 		int friendCount = 0;
-		for (Character c: this.getCharacters()) {
+		for (Character c : this.getCharacters()) {
 			if (!c.isEnemy()) {
-				friendCount ++;
+				friendCount++;
 			}
 		}
 		return friendCount;
 	}
-	
+
 	public void delete(Character character) {
-	    characters.remove(character);
+		characters.remove(character);
 	}
-	
+
 	public void addEnemy() {
 		characters.add(new Enemy());
-	};
-	
+	}
+
 	public ArrayList<Character> getCharacters() {
 		return characters;
 	}

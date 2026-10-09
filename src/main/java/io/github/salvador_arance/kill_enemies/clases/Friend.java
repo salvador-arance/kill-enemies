@@ -7,17 +7,17 @@ public class Friend implements Character {
 	public boolean isEnemy() {
 		return false;
 	}
-	
+
 	@Override
 	public void receiveAttack() {
 		System.out.println("¡ME HAS MATADO, A UN AMIGO, INSENSATO!");
 	}
-	
+
 	@Override
 	public void receiveDefense() {
 		System.out.println("¡Me han curado!");
 	}
-	
+
 	@Override
 	public String toString() {
 		return "es amigo.";

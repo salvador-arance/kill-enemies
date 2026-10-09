@@ -2,7 +2,7 @@ package io.github.salvador_arance.kill_enemies;
 
 import java.util.Scanner;
 
-import io.github.salvador_arance.kill_enemies.clases.*;
+import io.github.salvador_arance.kill_enemies.clases.Hero;
 import io.github.salvador_arance.kill_enemies.interfaces.Character;
 import io.github.salvador_arance.kill_enemies.repositories.CharactersRepository;
 
@@ -33,12 +33,12 @@ public class Main {
 			if (gameMode == DEFEND_MODE) {
 				heroActsOnCharacter(false);
 			}
-			
+
 			if (charactersRepo.friendCount() == 0) {
 				System.out.println("Te has cargado a todos tus amigos. GAME OVER.");
 				break;
 			}
-			
+
 			if (charactersRepo.enemyCount() == 0) {
 				System.out.println("No quedan enemigos que atacar. WIN.");
 				break;
@@ -51,9 +51,9 @@ public class Main {
 			}
 
 		} while (true);
-		
+
 		showFinalScore();
-		
+
 		scanner.close();
 
 	}
@@ -77,28 +77,28 @@ public class Main {
 	}
 
 	private static void heroActsOnCharacter(boolean attacking) {
-	    while (true) {
-	        System.out.print("Introduce el índice del personaje: ");
-	        try {
-	            int index = Integer.parseInt(scanner.nextLine()) - 1;
-	            Character target = charactersRepo.getCharacters().get(index);
+		while (true) {
+			System.out.print("Introduce el índice del personaje: ");
+			try {
+				int index = Integer.parseInt(scanner.nextLine()) - 1;
+				Character target = charactersRepo.getCharacters().get(index);
 
-	            if (attacking) {
-	                hero.attack(target);
-	                charactersRepo.delete(target);
-	            } else {
-	                hero.defend(target);
-	                if (target.isEnemy()) { 
-	                	charactersRepo.addEnemy();
-	                	} 
-	            }
-	            return;
-	        } catch (NumberFormatException e) {
-	            System.out.println("ERROR: Deberías introducir un número válido.");
-	        } catch (IndexOutOfBoundsException e) {
-	            System.out.println("ERROR: Deberías introducir un índice dentro de los márgenes.");
-	        }
-	    }
+				if (attacking) {
+					hero.attack(target);
+					charactersRepo.delete(target);
+				} else {
+					hero.defend(target);
+					if (target.isEnemy()) {
+						charactersRepo.addEnemy();
+					}
+				}
+				return;
+			} catch (NumberFormatException e) {
+				System.out.println("ERROR: Deberías introducir un número válido.");
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("ERROR: Deberías introducir un índice dentro de los márgenes.");
+			}
+		}
 	}
 
 	private static void clearConsole() {
@@ -106,7 +106,7 @@ public class Main {
 			System.out.println();
 		}
 	}
-	
+
 	private static void showFinalScore() {
 		System.out.println("Has matado " + hero.getKillCount() + " enemigos.");
 		System.out.println("Has defendido " + hero.getDefendCount() + " amigos.");
