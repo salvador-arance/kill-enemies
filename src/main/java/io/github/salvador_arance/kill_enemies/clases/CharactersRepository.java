@@ -6,10 +6,10 @@ import java.util.Collections;
 public class CharactersRepository {
 	private static final int ENEMY_COUNT = 5;
 	private static final int FRIEND_COUNT = 5;
-	ArrayList<Character> character;
+	private ArrayList<Character> characters;
 	
 	public CharactersRepository() {
-		this.character = new ArrayList<Character>();
+		this.setCharacters(new ArrayList<Character>());
 		addEnemies();
 		addFriends();
 		shuffle();
@@ -17,17 +17,25 @@ public class CharactersRepository {
 	
 	private void addEnemies() {
 		for (int i = 0; i < FRIEND_COUNT; i++) {
-			this.character.add(new Friend());
+			this.getCharacters().add(new Friend());
 		}
 	}
 	
 	private void addFriends() {
 		for (int i= 0; i < ENEMY_COUNT; i++) {
-			this.character.add(new Enemy());
+			this.getCharacters().add(new Enemy());
 		}
 	}
 	
 	private void shuffle() {
-		Collections.shuffle(character);
+		Collections.shuffle(getCharacters());
+	}
+
+	public ArrayList<Character> getCharacters() {
+		return characters;
+	}
+
+	private void setCharacters(ArrayList<Character> characters) {
+		this.characters = characters;
 	}
 }

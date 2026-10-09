@@ -8,5 +8,4 @@ public class Enemy implements Character {
 	public boolean isEnemy() {
 		return true;
 	}
-
 }
