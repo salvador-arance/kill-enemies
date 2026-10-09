@@ -69,7 +69,7 @@ public class Main {
 	  Enemy enemyAttacked;
 	  
 	  while (true) {
-		  
+		  System.out.print("Introduce el índice del enemigo al que quieres atacar: ");
 		  try {
 			  enemyIndex = Integer.parseInt(scanner.nextLine());
 			  enemyIndex --;
