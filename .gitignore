@@ -1,0 +1,49 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+.apt_generated/
+.factorypath
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# VS Code
+.vscode/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+nbdist/
+
+# Compilados y paquetes
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs y temporales
+*.log
+*.tmp
+*.swp
+hs_err_pid*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
