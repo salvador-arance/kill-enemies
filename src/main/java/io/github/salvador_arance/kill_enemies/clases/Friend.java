@@ -9,11 +9,17 @@ public class Friend implements Character {
 	}
 	
 	@Override
-	public String toString() {
-		return "es amigo.";
+	public void receiveAttack() {
+		System.out.println("¡ME HAS MATADO, A UN AMIGO, INSENSATO!");
 	}
 	
-	public void heal() {
+	@Override
+	public void receiveDefense() {
 		System.out.println("¡Me han curado!");
+	}
+	
+	@Override
+	public String toString() {
+		return "es amigo.";
 	}
 }

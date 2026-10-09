@@ -3,6 +3,7 @@ package io.github.salvador_arance.kill_enemies;
 import java.util.Scanner;
 
 import io.github.salvador_arance.kill_enemies.clases.*;
+import io.github.salvador_arance.kill_enemies.interfaces.Character;
 import io.github.salvador_arance.kill_enemies.repositories.CharactersRepository;
 
 public class Main {
@@ -26,11 +27,11 @@ public class Main {
 			gameMode = startGame();
 
 			if (gameMode == ATTACK_MODE) {
-				heroAttackEnemy();
+				heroActsOnCharacter(true);
 			}
 
 			if (gameMode == DEFEND_MODE) {
-				heroDefendsFriend();
+				heroActsOnCharacter(false);
 			}
 			
 			if (charactersRepo.friendCount() == 0) {
@@ -50,6 +51,8 @@ public class Main {
 			}
 
 		} while (true);
+		
+		showFinalScore();
 		
 		scanner.close();
 
@@ -73,74 +76,39 @@ public class Main {
 		}
 	}
 
-	private static void heroAttackEnemy() {
-		int enemyIndex;
-		Enemy enemyAttacked;
+	private static void heroActsOnCharacter(boolean attacking) {
+	    while (true) {
+	        System.out.print("Introduce el índice del personaje: ");
+	        try {
+	            int index = Integer.parseInt(scanner.nextLine()) - 1;
+	            Character target = charactersRepo.getCharacters().get(index);
 
-		while (true) {
-			System.out.print("Introduce el índice del enemigo al que quieres atacar: ");
-			try {
-				enemyIndex = Integer.parseInt(scanner.nextLine());
-				enemyIndex--;
-				if (charactersRepo.getCharacters().toArray()[enemyIndex] instanceof Friend) {
-					charactersRepo.deleteFriend(((Friend) charactersRepo.getCharacters().toArray()[enemyIndex]));
-					System.out.println("¡HAS MATADO A UN AMIGO, INSENSATO!");
-					return;
-				} else {
-					enemyAttacked = ((Enemy) charactersRepo.getCharacters().toArray()[enemyIndex]);
-
-					hero.attack(enemyAttacked);
-
-					charactersRepo.deleteEnemy(enemyAttacked);
-
-					System.out.println("Has matado a " + hero.getKillCount() + " enemigos.");
-					return;
-				}
-
-			} catch (NumberFormatException e) {
-				System.out.println("ERROR: Deberías introducir un número válido.");
-			} catch (ArrayIndexOutOfBoundsException e2) {
-				System.out.println("ERROR: Deberías introducir un número de índice dentro de los márgenes.");
-			}
-		}
-	}
-
-	private static void heroDefendsFriend() {
-
-		int friendIndex;
-		Friend friendDefended;
-
-		while (true) {
-			System.out.print("Introduce el índice del amigo al que quieres defender: ");
-
-			try {
-				friendIndex = Integer.parseInt(scanner.nextLine());
-				friendIndex--;
-
-				if (charactersRepo.getCharacters().toArray()[friendIndex] instanceof Enemy) {
-					charactersRepo.addEnemy();
-					System.out.println("¡Has ayudado a un enemigo y se ha reproducido!");
-					return;
-				} else {
-					friendDefended = ((Friend) charactersRepo.getCharacters().toArray()[friendIndex]);
-
-					hero.defend(friendDefended);
-
-					System.out.println("Has defendido a " + hero.getDefendCount() + " amigos.");
-					return;
-				}
-
-			} catch (NumberFormatException e) {
-				System.out.println("ERROR: Deberías introducir un número válido.");
-			} catch (ArrayIndexOutOfBoundsException e2) {
-				System.out.println("ERROR: Deberías introducir un número de índice dentro de los márgenes.");
-			}
-		}
+	            if (attacking) {
+	                hero.attack(target);
+	                charactersRepo.delete(target);
+	            } else {
+	                hero.defend(target);
+	                if (target.isEnemy()) { 
+	                	charactersRepo.addEnemy();
+	                	} 
+	            }
+	            return;
+	        } catch (NumberFormatException e) {
+	            System.out.println("ERROR: Deberías introducir un número válido.");
+	        } catch (IndexOutOfBoundsException e) {
+	            System.out.println("ERROR: Deberías introducir un índice dentro de los márgenes.");
+	        }
+	    }
 	}
 
 	private static void clearConsole() {
 		for (int i = 0; i < 100; i++) {
 			System.out.println();
 		}
+	}
+	
+	private static void showFinalScore() {
+		System.out.println("Has matado " + hero.getKillCount() + " enemigos.");
+		System.out.println("Has defendido " + hero.getDefendCount() + " amigos.");
 	}
 }

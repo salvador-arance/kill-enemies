@@ -2,7 +2,7 @@ package io.github.salvador_arance.kill_enemies.clases;
 
 import io.github.salvador_arance.kill_enemies.interfaces.Character;
 
-public class Hero implements Character {
+public class Hero {
 	private int killCount;
 	private int defendCount;
 	
@@ -11,21 +11,21 @@ public class Hero implements Character {
 		this.setDefendCount(0);
 	}
 	
-	@Override
-	public boolean isEnemy() {
-		return false;
+	public void attack(Character character) {
+		System.out.println("¡He atacado a alguien!");
+		character.receiveAttack();
+		if (character.isEnemy()) {
+			this.setKillCount(this.getKillCount() + 1);
+		}
+		
 	}
 	
-	public void attack(Enemy enemy) {
-		System.out.println("¡He atacado a un enemigo!");
-		enemy.kill();
-		this.setKillCount(this.getKillCount() + 1);
-	}
-	
-	public void defend(Friend friend) {
-		System.out.println("¡He defendido a un amigo!");
-		friend.heal();
-		this.setDefendCount(this.getDefendCount() + 1);
+	public void defend(Character character) {
+		System.out.println("¡He defendido a alguien!");
+		character.receiveDefense();
+		if (!character.isEnemy()) {
+			this.setDefendCount(this.getDefendCount() + 1);
+		}
 	}
 
 	public int getKillCount() {

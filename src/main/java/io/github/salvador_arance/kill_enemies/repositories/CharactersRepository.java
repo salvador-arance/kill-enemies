@@ -20,14 +20,14 @@ public class CharactersRepository {
 	}
 	
 	private void addEnemies() {
-		for (int i = 0; i < FRIEND_COUNT; i++) {
-			this.getCharacters().add(new Friend());
+		for (int i = 0; i < ENEMY_COUNT; i++) {
+			this.getCharacters().add(new Enemy());
 		}
 	}
 	
 	private void addFriends() {
-		for (int i= 0; i < ENEMY_COUNT; i++) {
-			this.getCharacters().add(new Enemy());
+		for (int i= 0; i < FRIEND_COUNT; i++) {
+			this.getCharacters().add(new Friend());
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class CharactersRepository {
 	public int enemyCount() {
 		int enemyCount = 0;
 		for (Character c: this.getCharacters()) {
-			if (c instanceof Enemy) {
+			if (c.isEnemy()) {
 				enemyCount ++;
 			}
 		}
@@ -57,19 +57,15 @@ public class CharactersRepository {
 	public int friendCount() {
 		int friendCount = 0;
 		for (Character c: this.getCharacters()) {
-			if (c instanceof Friend) {
+			if (!c.isEnemy()) {
 				friendCount ++;
 			}
 		}
 		return friendCount;
 	}
 	
-	public void deleteEnemy(Enemy enemy) {
-		characters.remove(enemy);
-	}
-	
-	public void deleteFriend(Friend friend) {
-		characters.remove(friend);
+	public void delete(Character character) {
+	    characters.remove(character);
 	}
 	
 	public void addEnemy() {
