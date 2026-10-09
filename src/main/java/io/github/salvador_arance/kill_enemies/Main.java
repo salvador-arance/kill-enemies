@@ -30,8 +30,16 @@ public class Main {
     	
     	if (gameMode == ATTACK_MODE) {
     		heroAttackEnemy();
-    	} else {
-    		
+    	} 
+    	
+    	if (gameMode == DEFEND_MODE){
+    		heroDefendsFriend();
+    	}
+    	
+    	System.out.print("¿Quieres seguir jugando? (S/N)");
+    	
+    	if (!scanner.nextLine().trim().toUpperCase().equals("S")) {
+    		return;
     	}
     	
     }while(true);
@@ -57,17 +65,18 @@ public class Main {
   }
   
   private static void heroAttackEnemy() {
-	  String answer;
 	  int enemyIndex;
 	  Enemy enemyAttacked;
 	  
 	  while (true) {
-		  System.out.print("Introduce el índice del enemigo al que quieres atacar: ");
+		  
 		  try {
 			  enemyIndex = Integer.parseInt(scanner.nextLine());
 			  enemyIndex --;
 			  if (charactersRepo.getCharacters().toArray()[enemyIndex] instanceof Friend) {
-				  System.out.println("ERROR: Has introducido el índice de un amigo!");
+				  charactersRepo.deleteFriend(((Friend)charactersRepo.getCharacters().toArray()[enemyIndex]));
+				  System.out.println("¡HAS MATADO A UN AMIGO, INSENSATO!");
+				  return;
 			  } else {
 				  enemyAttacked = ((Enemy) charactersRepo.getCharacters().toArray()[enemyIndex]);
 				  
@@ -80,6 +89,38 @@ public class Main {
 			  }
 			  
 		  } catch (NumberFormatException e) {
+			  
+		  } catch (ArrayIndexOutOfBoundsException e2) {
+			  System.out.println("ERROR: Deberías introducir un número de índice dentro de los márgenes.");
+		  }
+	  }
+  }
+
+  private static void heroDefendsFriend() {
+	  int friendIndex;
+	  Friend friendDefended;
+	  
+	  while (true) {
+		  System.out.print("Introduce el índice del amigo al que quieres defender: ");
+		  
+		  try {
+			  friendIndex = Integer.parseInt(scanner.nextLine());
+			  friendIndex --;
+			  
+			  if (charactersRepo.getCharacters().toArray()[friendIndex] instanceof Enemy) {
+				  charactersRepo.addEnemy();
+				  System.out.println("¡Has ayudado a un enemigo y se ha reproducido!");
+				  return;
+			  } else {
+				  friendDefended = ((Friend) charactersRepo.getCharacters().toArray()[friendIndex]);
+				  
+				  hero.defend(friendDefended);;
+				  
+				  System.out.println("Has defendido a " + hero.getDefendCount() + " amigos.");
+				  return;
+			  }
+			  
+		  } catch (NumberFormatException e) {
 			  System.out.println("ERROR: Deberías introducir un número válido.");
 		  } catch (ArrayIndexOutOfBoundsException e2) {
 			  System.out.println("ERROR: Deberías introducir un número de índice dentro de los márgenes.");
@@ -87,3 +128,4 @@ public class Main {
 	  }
   }
 }
+

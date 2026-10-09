@@ -68,6 +68,14 @@ public class CharactersRepository {
 		characters.remove(enemy);
 	}
 	
+	public void deleteFriend(Friend friend) {
+		characters.remove(friend);
+	}
+	
+	public void addEnemy() {
+		characters.add(new Enemy());
+	};
+	
 	public ArrayList<Character> getCharacters() {
 		return characters;
 	}
