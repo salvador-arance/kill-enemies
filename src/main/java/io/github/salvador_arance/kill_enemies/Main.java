@@ -2,7 +2,6 @@ package io.github.salvador_arance.kill_enemies;
 import java.util.Scanner;
 
 import io.github.salvador_arance.kill_enemies.clases.*;
-import io.github.salvador_arance.kill_enemies.interfaces.Character;
 import io.github.salvador_arance.kill_enemies.repositories.CharactersRepository;
 
 public class Main {
@@ -20,11 +19,8 @@ public class Main {
     int gameMode;
     
     do {
+    	clearConsole();
     	charactersRepo.showCharacters();
-    	if (charactersRepo.enemyCount() == 0) {
-    		System.out.println("No quedan enemigos que atacar");
-    		return;
-    	}
     	
     	gameMode = startGame();
     	
@@ -33,10 +29,19 @@ public class Main {
     	} 
     	
     	if (gameMode == DEFEND_MODE){
+    		if (charactersRepo.friendCount() == 0) {
+    			System.out.println("Te has cargado a todos tus amigos. GAME OVER.");
+    			return;
+    		}
     		heroDefendsFriend();
     	}
     	
-    	System.out.print("¿Quieres seguir jugando? (S/N)");
+    	if (charactersRepo.enemyCount() == 0) {
+    		System.out.println("No quedan enemigos que atacar. WIN.");
+    		return;
+    	}
+    	
+    	System.out.print("¿Quieres seguir jugando? (S/N): ");
     	
     	if (!scanner.nextLine().trim().toUpperCase().equals("S")) {
     		return;
@@ -97,6 +102,7 @@ public class Main {
   }
 
   private static void heroDefendsFriend() {
+
 	  int friendIndex;
 	  Friend friendDefended;
 	  
@@ -127,5 +133,11 @@ public class Main {
 		  }
 	  }
   }
+  
+  private static void clearConsole() {
+	    for (int i = 0; i < 100; i++) {
+	        System.out.println();
+	    }
+	}
 }
 
