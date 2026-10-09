@@ -64,6 +64,10 @@ public class CharactersRepository {
 		return friendCount;
 	}
 	
+	public void deleteEnemy(Enemy enemy) {
+		characters.remove(enemy);
+	}
+	
 	public ArrayList<Character> getCharacters() {
 		return characters;
 	}
