@@ -3,19 +3,19 @@ package io.github.salvador_arance.kill_enemies;
 import java.util.Scanner;
 
 import io.github.salvador_arance.kill_enemies.clases.Hero;
-import io.github.salvador_arance.kill_enemies.interfaces.Character;
-import io.github.salvador_arance.kill_enemies.repositories.CharactersRepository;
+import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
+import io.github.salvador_arance.kill_enemies.repositories.TargetsRepository;
 
 public class Main {
 	private static final int ATTACK_MODE = 1;
 	private static final int DEFEND_MODE = 2;
 
 	static Hero hero;
-	static CharactersRepository charactersRepo;
+	static TargetsRepository targetsRepo;
 	static Scanner scanner;
 
 	public static void main(String[] args) {
-		charactersRepo = new CharactersRepository();
+		targetsRepo = new TargetsRepository();
 		scanner = new Scanner(System.in);
 		int gameMode;
 		String nombreHeroe; 
@@ -35,9 +35,9 @@ public class Main {
 		hero = new Hero(nombreHeroe);
 		
 		do {
-			System.out.println("Número de amigos: " + charactersRepo.friendCount()
-					+ "\n" + "Número de enemigos: " + charactersRepo.enemyCount() + "\n");
-			charactersRepo.showCharacters();
+			System.out.println("Número de amigos: " + targetsRepo.friendCount()
+					+ "\n" + "Número de enemigos: " + targetsRepo.enemyCount() + "\n");
+			targetsRepo.showTargets();
 
 			gameMode = startGame();
 
@@ -49,12 +49,12 @@ public class Main {
 				heroActsOnCharacter(false);
 			}
 
-			if (charactersRepo.friendCount() == 0) {
+			if (targetsRepo.friendCount() == 0) {
 				System.out.println("Te has cargado a todos tus amigos. GAME OVER, " + hero.getName());
 				break;
 			}
 
-			if (charactersRepo.enemyCount() == 0) {
+			if (targetsRepo.enemyCount() == 0) {
 				System.out.println("No quedan enemigos que atacar. WIN, " + hero.getName());
 				break;
 			}
@@ -97,15 +97,15 @@ public class Main {
 			System.out.print("Introduce el índice del personaje: ");
 			try {
 				int index = Integer.parseInt(scanner.nextLine()) - 1;
-				Character target = charactersRepo.getCharacters().get(index);
+				Targetable target = targetsRepo.getTargets().get(index);
 
 				if (attacking) {
 					hero.attack(target);
-					charactersRepo.delete(target);
+					targetsRepo.delete(target);
 				} else {
 					hero.defend(target);
 					if (target.isEnemy()) {
-						charactersRepo.addEnemy();
+						targetsRepo.addEnemy();
 					}
 				}
 				return;

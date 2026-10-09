@@ -1,8 +1,8 @@
 package io.github.salvador_arance.kill_enemies.clases;
 
-import io.github.salvador_arance.kill_enemies.interfaces.Character;
+import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
-public class Enemy implements Character {
+public class Enemy implements Targetable {
 	@Override
 	public void receiveAttack() {
 		System.out.println("¡Ahhhggg, me mataste, bastardo!");

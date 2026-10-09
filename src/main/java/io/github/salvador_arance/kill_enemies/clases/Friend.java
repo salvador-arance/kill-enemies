@@ -1,8 +1,8 @@
 package io.github.salvador_arance.kill_enemies.clases;
 
-import io.github.salvador_arance.kill_enemies.interfaces.Character;
+import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
-public class Friend implements Character {
+public class Friend implements Targetable {
 	@Override
 	public boolean isEnemy() {
 		return false;
@@ -10,7 +10,7 @@ public class Friend implements Character {
 
 	@Override
 	public void receiveAttack() {
-		System.out.println("¡ME HAS MATADO, A UN AMIGO, INSENSATO!");
+		System.out.println("¡ME HAS MATADO INSENSATO!");
 	}
 
 	@Override
