@@ -1,7 +1,6 @@
 package io.github.salvador_arance.kill_enemies.clases;
 
 import io.github.salvador_arance.kill_enemies.interfaces.Character;
-import io.github.salvador_arance.kill_enemies.repositories.CharactersRepository;
 
 public class Hero implements Character {
 	private int killCount;
