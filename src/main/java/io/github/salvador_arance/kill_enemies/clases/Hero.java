@@ -6,7 +6,7 @@ public class Hero implements Character {
 	private int killCount;
 	private int defendCount;
 	
-	Hero() {
+	public Hero() {
 		this.setKillCount(0);
 		this.setDefendCount(0);
 	}
@@ -17,13 +17,14 @@ public class Hero implements Character {
 	}
 	
 	public void attack(Enemy enemy) {
-		System.out.println("He atacado a un enemigo!");
+		System.out.println("¡He atacado a un enemigo!");
 		enemy.kill();
 		this.setKillCount(this.getKillCount() + 1);
 	}
 	
 	public void defend(Friend friend) {
-		System.out.println("He defendido a un amigo!");
+		System.out.println("¡He defendido a un amigo!");
+		friend.heal();
 		this.setDefendCount(this.getDefendCount() + 1);
 	}
 

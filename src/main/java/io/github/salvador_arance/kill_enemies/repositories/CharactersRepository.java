@@ -34,7 +34,36 @@ public class CharactersRepository {
 	private void shuffle() {
 		Collections.shuffle(getCharacters());
 	}
-
+	
+	public void showCharacters() {
+		int characterIndex = 0;
+		
+		for (Character c: this.getCharacters()) {
+			++ characterIndex;
+			System.out.println("Personaje " + characterIndex + ": " + c.toString());
+		}
+	}
+	
+	public int enemyCount() {
+		int enemyCount = 0;
+		for (Character c: this.getCharacters()) {
+			if (c instanceof Enemy) {
+				enemyCount ++;
+			}
+		}
+		return enemyCount;
+	}
+	
+	public int friendCount() {
+		int friendCount = 0;
+		for (Character c: this.getCharacters()) {
+			if (c instanceof Friend) {
+				friendCount ++;
+			}
+		}
+		return friendCount;
+	}
+	
 	public ArrayList<Character> getCharacters() {
 		return characters;
 	}

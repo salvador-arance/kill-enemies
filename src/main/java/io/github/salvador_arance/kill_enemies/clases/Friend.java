@@ -7,4 +7,13 @@ public class Friend implements Character {
 	public boolean isEnemy() {
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return "es amigo.";
+	}
+	
+	public void heal() {
+		System.out.println("¡Me han curado!");
+	}
 }

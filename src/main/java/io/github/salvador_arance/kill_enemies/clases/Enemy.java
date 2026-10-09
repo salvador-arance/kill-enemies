@@ -4,10 +4,15 @@ import io.github.salvador_arance.kill_enemies.interfaces.Character;
 
 public class Enemy implements Character {
 	public void kill() {
-		System.out.println("Ahhhggg, me mataste, bastardo!");
+		System.out.println("¡Ahhhggg, me mataste, bastardo!");
 	}
 	@Override
 	public boolean isEnemy() {
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "es enemigo.";
 	}
 }
