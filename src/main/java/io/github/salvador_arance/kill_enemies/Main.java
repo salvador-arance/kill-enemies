@@ -89,7 +89,7 @@ public class Main {
 			  }
 			  
 		  } catch (NumberFormatException e) {
-			  
+			  System.out.println("ERROR: Deberías introducir un número válido.");
 		  } catch (ArrayIndexOutOfBoundsException e2) {
 			  System.out.println("ERROR: Deberías introducir un número de índice dentro de los márgenes.");
 		  }
