@@ -50,12 +50,12 @@ public class Main {
 			}
 
 			if (charactersRepo.friendCount() == 0) {
-				System.out.println("Te has cargado a todos tus amigos. GAME OVER.");
+				System.out.println("Te has cargado a todos tus amigos. GAME OVER, " + hero.getName());
 				break;
 			}
 
 			if (charactersRepo.enemyCount() == 0) {
-				System.out.println("No quedan enemigos que atacar. WIN.");
+				System.out.println("No quedan enemigos que atacar. WIN, " + hero.getName());
 				break;
 			}
 
