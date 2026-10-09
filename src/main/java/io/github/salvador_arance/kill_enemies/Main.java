@@ -16,12 +16,27 @@ public class Main {
 
 	public static void main(String[] args) {
 		charactersRepo = new CharactersRepository();
-		hero = new Hero();
 		scanner = new Scanner(System.in);
 		int gameMode;
-
+		String nombreHeroe; 
+		
+		while (true) {
+			System.out.print("Elige un nombre para el héroe: ");
+			nombreHeroe = scanner.nextLine().trim();
+			
+			
+			if (nombreHeroe.isEmpty()) {
+				System.out.println("Introduce un nombre, por favor.");
+			} else {
+				break;
+			}
+		}
+		
+		hero = new Hero(nombreHeroe);
+		
 		do {
-			clearConsole();
+			System.out.println("Número de amigos: " + charactersRepo.friendCount()
+					+ "\n" + "Número de enemigos: " + charactersRepo.enemyCount() + "\n");
 			charactersRepo.showCharacters();
 
 			gameMode = startGame();
@@ -49,7 +64,8 @@ public class Main {
 			if (!scanner.nextLine().trim().toUpperCase().equals("S")) {
 				break;
 			}
-
+			
+			clearConsole();
 		} while (true);
 
 		showFinalScore();

@@ -5,10 +5,12 @@ import io.github.salvador_arance.kill_enemies.interfaces.Character;
 public class Hero {
 	private int killCount;
 	private int defendCount;
-
-	public Hero() {
-		this.setKillCount(0);
+	private String name;
+	
+	public Hero(String name) {
+		this.setName(name);
 		this.setDefendCount(0);
+		this.setKillCount(0);
 	}
 
 	public void attack(Character character) {
@@ -41,5 +43,13 @@ public class Hero {
 
 	private void setDefendCount(int defendCount) {
 		this.defendCount = defendCount;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	private void setName(String name) {
+		this.name = name;
 	}
 }
