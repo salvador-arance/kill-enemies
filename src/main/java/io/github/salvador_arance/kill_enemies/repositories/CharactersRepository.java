@@ -1,7 +1,11 @@
-package io.github.salvador_arance.kill_enemies.clases;
+package io.github.salvador_arance.kill_enemies.repositories;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import io.github.salvador_arance.kill_enemies.clases.Enemy;
+import io.github.salvador_arance.kill_enemies.clases.Friend;
+import io.github.salvador_arance.kill_enemies.interfaces.Character;
 
 public class CharactersRepository {
 	private static final int ENEMY_COUNT = 5;
