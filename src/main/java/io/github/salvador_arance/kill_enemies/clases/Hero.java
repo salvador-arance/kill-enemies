@@ -4,6 +4,7 @@ import io.github.salvador_arance.kill_enemies.interfaces.Character;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
 public class Hero implements Character {
+	private static final long serialVersionUID = -1743143996233958670L;
 	private int killCount;
 	private int defendCount;
 	private String name;

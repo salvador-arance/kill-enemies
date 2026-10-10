@@ -1,5 +1,6 @@
 package io.github.salvador_arance.kill_enemies.repositories;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,7 +8,8 @@ import io.github.salvador_arance.kill_enemies.clases.Enemy;
 import io.github.salvador_arance.kill_enemies.clases.Friend;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
-public class TargetsRepository {
+public class TargetsRepository implements Serializable {
+	private static final long serialVersionUID = 955415117213900915L;
 	private static final int ENEMY_COUNT = 5;
 	private static final int FRIEND_COUNT = 5;
 	private ArrayList<Targetable> targets;

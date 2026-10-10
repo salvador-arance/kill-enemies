@@ -1,5 +1,7 @@
 package io.github.salvador_arance.kill_enemies.interfaces;
 
-public interface Character {
+import java.io.Serializable;
+
+public interface Character extends Serializable{
 	boolean isEnemy();
 }

@@ -71,7 +71,6 @@ public class Main {
 		showFinalScore();
 
 		scanner.close();
-
 	}
 
 	private static int startGame() {
