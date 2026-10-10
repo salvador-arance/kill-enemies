@@ -18,21 +18,21 @@ public class Main {
 		targetsRepo = new TargetsRepository();
 		scanner = new Scanner(System.in);
 		int gameMode;
-		String nombreHeroe; 
+		String heroName; 
 		
 		while (true) {
 			System.out.print("Elige un nombre para el héroe: ");
-			nombreHeroe = scanner.nextLine().trim();
+			heroName = scanner.nextLine().trim();
 			
 			
-			if (nombreHeroe.isEmpty()) {
+			if (heroName.isEmpty()) {
 				System.out.println("Introduce un nombre, por favor.");
 			} else {
 				break;
 			}
 		}
 		
-		hero = new Hero(nombreHeroe);
+		hero = new Hero(heroName);
 		
 		do {
 			System.out.println("Número de amigos: " + targetsRepo.friendCount()
