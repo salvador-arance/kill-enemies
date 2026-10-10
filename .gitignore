@@ -47,3 +47,8 @@ hs_err_pid*
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Ficheros varios
+
+ENUNCIADO.md
+POSIBLES_MEJORAS.md
