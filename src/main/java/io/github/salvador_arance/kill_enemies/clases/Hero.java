@@ -15,19 +15,27 @@ public class Hero implements Character {
 	}
 
 	public void attack(Targetable target) {
-		System.out.println("¡He atacado a alguien!");
-		target.receiveAttack();
+		
 		if (target.isEnemy()) {
+			System.out.println("¡He atacado a un enemigo!");
 			this.setKillCount(this.getKillCount() + 1);
+		} else {
+			System.out.println("¡He atacado a un amigo!");
 		}
+		
+		target.receiveAttack();
 	}
 
 	public void defend(Targetable target) {
-		System.out.println("¡He defendido a alguien!");
-		target.receiveDefense();
+		
 		if (!target.isEnemy()) {
+			System.out.println("¡He defendido a un amigo!");
 			this.setDefendCount(this.getDefendCount() + 1);
+		} else {
+			System.out.println("He defendido a un enemigo");
 		}
+		
+		target.receiveDefense();
 	}
 	
 	@Override 
