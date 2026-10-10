@@ -49,6 +49,8 @@ hs_err_pid*
 Thumbs.db
 
 # Ficheros varios
-
 ENUNCIADO.md
 POSIBLES_MEJORAS.md
+
+# Partidas Guardadas
+*.dat
