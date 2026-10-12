@@ -127,8 +127,9 @@ public class Main {
 				Targetable target = targetsRepo.getTargets().get(index);
 
 				if (attacking) {
-					hero.attack(target);
-					targetsRepo.delete(target);
+					if (hero.attack(target)) {
+						targetsRepo.delete(target);
+					}
 				} else {
 					hero.defend(target);
 					if (target.isEnemy()) {

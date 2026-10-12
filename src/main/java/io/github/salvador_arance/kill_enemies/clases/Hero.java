@@ -6,19 +6,45 @@ import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 public class Hero implements Character {
 	private static final int MAX_HITS = 3;
 	private static final long serialVersionUID = 1L;
+	private static final int ATTACK_FAIL_CHANCE = 25;
+	
 	private int killCount;
 	private int defendCount;
 	private String name;
 	private int hits;
+	private int roundsWithoutKilling;
+	private int roundsWithoutDefending;
 
 	public Hero(String name) {
 		this.setName(name);
 		this.setDefendCount(0);
 		this.setKillCount(0);
 		this.setHits(0);
+		this.setRoundsWithoutKilling(0);
+		this.setRoundsWithoutDefending(0);
+	}
+	
+	
+	public void registerRound (boolean killed, boolean defended) {
+		if (!killed) {
+			this.setRoundsWithoutKilling(this.getRoundsWithoutKilling() + 1);
+		} else {
+			this.setRoundsWithoutKilling(0);
+		}
+		
+		if (!defended) {
+			this.setRoundsWithoutDefending(this.getRoundsWithoutDefending() + 1);
+		} else {
+			this.setRoundsWithoutDefending(0);
+		}
 	}
 
-	public void attack(Targetable target) {
+	public boolean attack(Targetable target) {
+		
+		if (target.isEnemy() && Chance.roll(ATTACK_FAIL_CHANCE)) {
+			System.out.println("¡He fallado el ataque!");
+			return false;
+		}
 
 		if (target.isEnemy()) {
 			System.out.println("¡He atacado a un enemigo!");
@@ -28,6 +54,8 @@ public class Hero implements Character {
 		}
 
 		target.receiveAttack();
+		
+		return true;
 	}
 
 	public void defend(Targetable target) {
@@ -91,5 +119,21 @@ public class Hero implements Character {
 
 	private void setHits(int hits) {
 		this.hits = hits;
+	}
+
+	public int getRoundsWithoutKilling() {
+		return roundsWithoutKilling;
+	}
+
+	private void setRoundsWithoutKilling(int roundsWithoutKilling) {
+		this.roundsWithoutKilling = roundsWithoutKilling;
+	}
+
+	public int getRoundsWithoutDefending() {
+		return roundsWithoutDefending;
+	}
+
+	private void setRoundsWithoutDefending(int roundsWithoutDefending) {
+		this.roundsWithoutDefending = roundsWithoutDefending;
 	}
 }
