@@ -27,15 +27,15 @@ Al principio de cada ronda se muestra el número de amigos, el número de enemig
 
 | Opción | Acción | Qué pasa |
 |---|---|---|
-| **1** | Atacar | Eliges el número de un personaje. Si es un enemigo, tienes un **25% de fallar**; si aciertas, muere y suma a tu marcador. Si es un amigo, **muere siempre** (¡insensato!). |
+| **1** | Atacar | Eliges el número de un personaje. Si es un enemigo, tienes un **30% de fallar**; si aciertas, muere y suma a tu marcador. Si es un amigo, **muere siempre** (¡insensato!). |
 | **2** | Defender | Eliges el número de un personaje. Si es un amigo, lo defiendes y suma a tu marcador. Si es un enemigo, **se reproduce**: aparece otro enemigo. |
-| **3** | Curarte | Tus impactos vuelven a 0. No necesitas elegir ningún personaje. |
+| **3** | Curarte | Tus impactos vuelven a 0, pero la curación tiene un **25% de fallar**: en ese caso conservas los impactos. No necesitas elegir ningún personaje. |
 
 ### Peligros: lo que pasa después de tu acción
 Tras actuar, el juego resuelve estas tres cosas, por este orden:
 
 1. **Ataque enemigo.** Si quedan enemigos, hay un **50%** de que uno te ataque, y el ataque tiene un **75%** de impactar. Cada impacto suma 1 a tus impactos. Solo hay **un ataque como máximo por ronda**, sin importar cuántos enemigos queden.
-2. **Si no defiendes, mueren amigos.** Si pasas **más de dos rondas seguidas sin defender a un amigo** (a partir de la tercera), hay un **60%** de que un amigo aleatorio muera al final de la ronda.
+2. **Si no defiendes, mueren amigos.** Si pasas **más de dos rondas seguidas sin defender a un amigo** (a partir de la tercera), hay un **70%** de que un amigo aleatorio muera al final de la ronda.
 3. **Si no matas, aparecen enemigos.** Si pasas **más de tres rondas seguidas sin matar a un enemigo** (a partir de la cuarta), hay un **75%** de que aparezca un enemigo nuevo.
 
 Cómo cuentan las rondas:
@@ -63,15 +63,16 @@ Si la partida sigue, al final de cada ronda eliges:
 
 | Qué | Probabilidad |
 |---|---|
-| Fallar al atacar a un enemigo | 25% |
+| Fallar al atacar a un enemigo | 30% |
+| Fallar al curarte | 25% |
 | Un enemigo te ataca en una ronda | 50% |
 | El ataque enemigo te impacta | 75% |
-| Muere un amigo (tras más de 2 rondas sin defender) | 60% |
+| Muere un amigo (tras más de 2 rondas sin defender) | 70% |
 | Aparece un enemigo (tras más de 3 rondas sin matar) | 75% |
 
 ## Extensiones sobre el enunciado
 
-El enunciado deja libertad para añadir características. Las mecánicas de **impactos y curación**, el **fallo al atacar**, los **ataques enemigos** y las **reglas por rondas** (amigos que mueren y enemigos que aparecen) son extensiones propias.
+El enunciado deja libertad para añadir características. Las mecánicas de **impactos y curación** (que puede fallar), el **fallo al atacar**, los **ataques enemigos** y las **reglas por rondas** (amigos que mueren y enemigos que aparecen) son extensiones propias.
 
 ## Diseño
 
