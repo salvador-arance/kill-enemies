@@ -4,42 +4,59 @@ import io.github.salvador_arance.kill_enemies.interfaces.Character;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
 public class Hero implements Character {
+	private static final int MAX_HITS = 3;
 	private static final long serialVersionUID = 1L;
 	private int killCount;
 	private int defendCount;
 	private String name;
-	
+	private int hits;
+
 	public Hero(String name) {
 		this.setName(name);
 		this.setDefendCount(0);
 		this.setKillCount(0);
+		this.setHits(0);
 	}
 
 	public void attack(Targetable target) {
-		
+
 		if (target.isEnemy()) {
 			System.out.println("¡He atacado a un enemigo!");
 			this.setKillCount(this.getKillCount() + 1);
 		} else {
 			System.out.println("¡He atacado a un amigo!");
 		}
-		
+
 		target.receiveAttack();
 	}
 
 	public void defend(Targetable target) {
-		
+
 		if (!target.isEnemy()) {
 			System.out.println("¡He defendido a un amigo!");
 			this.setDefendCount(this.getDefendCount() + 1);
 		} else {
 			System.out.println("He defendido a un enemigo");
 		}
-		
+
 		target.receiveDefense();
 	}
-	
-	@Override 
+
+	public void receiveHit() {
+		hits++;
+		System.out.println("¡Te han herido! Impactos: " + hits + " / " + MAX_HITS);
+	}
+
+	public void heal() {
+		this.setHits(0);
+		System.out.println("Te has curado. Impactos: " + hits + " / " + MAX_HITS);
+	}
+
+	public boolean isDead() {
+		return hits >= MAX_HITS;
+	}
+
+	@Override
 	public boolean isEnemy() {
 		return false;
 	}
@@ -66,5 +83,13 @@ public class Hero implements Character {
 
 	private void setName(String name) {
 		this.name = name;
+	}
+
+	public int getHits() {
+		return hits;
+	}
+
+	private void setHits(int hits) {
+		this.hits = hits;
 	}
 }
