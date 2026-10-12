@@ -16,7 +16,7 @@ Para pasar los tests: `mvn test`.
 ## Cómo se juega
 
 ### Objetivo
-Eliminar a todos los enemigos sin que mueran todos tus amigos y sin que te maten a ti.
+Eliminar a todos los enemigos sin que mueran todos tus amigos y sin que te maten a ti. **RECOMIENDO ENCARECIDAMENTE JUGAR ANTES DE VER LAS REGLAS.**
 
 ### Inicio de partida
 - Si existe una partida guardada (`savegame.dat`), se carga y no se pide el nombre.
