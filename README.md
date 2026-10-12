@@ -1,6 +1,6 @@
 # kill-enemies
 
-Juego de consola donde un héroe ataca enemigos y defiende amigos. Enunciado completo en [ENUNCIADO.md](./ENUNCIADO.md).
+Juego de consola donde un héroe ataca enemigos y defiende amigos.
 
 ## Cómo ejecutarlo
 
@@ -72,8 +72,6 @@ Si la partida sigue, al final de cada ronda eliges:
 ## Extensiones sobre el enunciado
 
 El enunciado deja libertad para añadir características. Las mecánicas de **impactos y curación**, el **fallo al atacar**, los **ataques enemigos** y las **reglas por rondas** (amigos que mueren y enemigos que aparecen) son extensiones propias.
-
-La bossfight está diseñada pero **no implementada** en esta versión. Los detalles están en [BOSSFIGHT.md](./BOSSFIGHT.md).
 
 ## Diseño
 
