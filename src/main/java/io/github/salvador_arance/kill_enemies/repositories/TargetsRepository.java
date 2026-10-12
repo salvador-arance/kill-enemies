@@ -9,7 +9,7 @@ import io.github.salvador_arance.kill_enemies.clases.Friend;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
 public class TargetsRepository implements Serializable {
-	private static final long serialVersionUID = 955415117213900915L;
+	private static final long serialVersionUID = 1L;
 	private static final int ENEMY_COUNT = 5;
 	private static final int FRIEND_COUNT = 5;
 	private ArrayList<Targetable> targets;

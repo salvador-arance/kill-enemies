@@ -3,7 +3,8 @@ package io.github.salvador_arance.kill_enemies.clases;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 
 public class Enemy implements Targetable {
-	private static final long serialVersionUID = 4025204907864817561L;
+
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void receiveAttack() {
