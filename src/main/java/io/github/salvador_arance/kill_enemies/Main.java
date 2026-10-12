@@ -18,21 +18,9 @@ public class Main {
 		targetsRepo = new TargetsRepository();
 		scanner = new Scanner(System.in);
 		int gameMode;
-		String heroName; 
+		String heroName = null; 
 		
-		while (true) {
-			System.out.print("Elige un nombre para el héroe: ");
-			heroName = scanner.nextLine().trim();
-			
-			
-			if (heroName.isEmpty()) {
-				System.out.println("Introduce un nombre, por favor.");
-			} else {
-				break;
-			}
-		}
-		
-		hero = new Hero(heroName);
+		askHeroName(heroName);
 		
 		do {
 			System.out.println("Número de amigos: " + targetsRepo.friendCount()
@@ -71,6 +59,22 @@ public class Main {
 		showFinalScore();
 
 		scanner.close();
+	}
+
+	private static void askHeroName(String heroName) {
+		while (true) {
+			System.out.print("Elige un nombre para el héroe: ");
+			heroName = scanner.nextLine().trim();
+			
+			
+			if (heroName.isEmpty()) {
+				System.out.println("Introduce un nombre, por favor.");
+			} else {
+				break;
+			}
+		}
+		
+		hero = new Hero(heroName);
 	}
 
 	private static int startGame() {
