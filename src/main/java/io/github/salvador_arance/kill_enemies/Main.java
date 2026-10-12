@@ -43,7 +43,7 @@ public class Main {
 			targetsRepo.showTargets();
 
 			gameMode = startGame();
-			
+
 			heroActsOnCharacter(gameMode == ATTACK_MODE);
 
 			if (targetsRepo.friendCount() == 0) {

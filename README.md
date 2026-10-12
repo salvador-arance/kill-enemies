@@ -1,7 +1,6 @@
 # kill-enemies
 
 Juego de consola donde un héroe ataca enemigos y defiende amigos.
-Enunciado completo en [ENUNCIADO.md](./ENUNCIADO.md).
 
 ## Diseño
 
@@ -19,7 +18,6 @@ El enunciado pide `attack(Enemy)` y `defend(Friend)`, pero también que atacar
 a un amigo lo elimine y que defender a un enemigo lo duplique. Con esas firmas
 no es posible, así que `attack` y `defend` reciben un `Targetable`.
 
-### La reacción la decide cada clase
 En lugar de usar `instanceof` en `Main`, cada personaje implementa cómo reacciona:
 - Enemigo atacado: muere. Enemigo defendido: se reproduce.
 - Amigo atacado: muere. Amigo defendido: se cura.
