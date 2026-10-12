@@ -8,4 +8,8 @@ public class Chance {
 	public static boolean roll (int percent) {
 		return RANDOM.nextInt(100) < percent;
 	}
+	
+	public static int pick(int bound) {
+		return RANDOM.nextInt(bound);
+	}
 }

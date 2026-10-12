@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import io.github.salvador_arance.kill_enemies.clases.Chance;
 import io.github.salvador_arance.kill_enemies.clases.Enemy;
 import io.github.salvador_arance.kill_enemies.clases.Friend;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
@@ -72,6 +73,22 @@ public class TargetsRepository implements Serializable {
 
 	public void addEnemy() {
 		targets.add(new Enemy());
+	}
+
+	public void removeRandomFriend() {
+		ArrayList<Targetable> friends = new ArrayList<>();
+
+		for (Targetable t : this.targets) {
+			if (!t.isEnemy()) {
+				friends.add(t);
+			}
+		}
+
+		if (friends.isEmpty()) {
+			return;
+		}
+
+		targets.remove(friends.get(Chance.pick(friends.size())));
 	}
 
 	public ArrayList<Targetable> getTargets() {
