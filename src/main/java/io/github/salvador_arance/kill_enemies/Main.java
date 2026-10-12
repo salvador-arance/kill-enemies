@@ -24,7 +24,7 @@ public class Main {
 	private static final int ENEMY_SPAWN_CHANCE = 75;
 
 	private static final int ROUNDS_WITHOUT_DEFENDING_LIMIT = 2;
-	private static final int ROUNDS_WITHOUT_KILLING_LIMIT = 2;
+	private static final int ROUNDS_WITHOUT_KILLING_LIMIT = 3;
 
 	private static final String FILE_PATH = "savegame.dat";
 

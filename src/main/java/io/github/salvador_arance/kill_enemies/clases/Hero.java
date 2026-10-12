@@ -7,6 +7,7 @@ public class Hero implements Character {
 	private static final int MAX_HITS = 3;
 	private static final long serialVersionUID = 1L;
 	private static final int ATTACK_FAIL_CHANCE = 30;
+	private static final int HEAL_FAIL_CHANCE = 25;
 	
 	private int killCount;
 	private int defendCount;
@@ -76,8 +77,13 @@ public class Hero implements Character {
 	}
 
 	public void heal() {
-		this.setHits(0);
-		System.out.println("Te has curado. Impactos: " + hits + " / " + MAX_HITS);
+		
+		if (Chance.roll(HEAL_FAIL_CHANCE)) {
+			System.out.println("La curación ha fallado.");
+		} else {
+			this.setHits(0);
+			System.out.println("Te has curado. Impactos: " + hits + " / " + MAX_HITS);
+		}
 	}
 
 	public boolean isDead() {
