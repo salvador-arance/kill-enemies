@@ -6,7 +6,7 @@ import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 public class Hero implements Character {
 	private static final int MAX_HITS = 3;
 	private static final long serialVersionUID = 1L;
-	private static final int ATTACK_FAIL_CHANCE = 25;
+	private static final int ATTACK_FAIL_CHANCE = 30;
 	
 	private int killCount;
 	private int defendCount;
