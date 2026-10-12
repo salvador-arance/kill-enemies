@@ -87,7 +87,7 @@ public class TargetsRepository implements Serializable {
 		if (friends.isEmpty()) {
 			return;
 		}
-
+		
 		targets.remove(friends.get(Chance.pick(friends.size())));
 	}
 

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.Scanner;
 
+import io.github.salvador_arance.kill_enemies.clases.Chance;
 import io.github.salvador_arance.kill_enemies.clases.Hero;
 import io.github.salvador_arance.kill_enemies.interfaces.Targetable;
 import io.github.salvador_arance.kill_enemies.persistence.GameState;
@@ -14,6 +15,17 @@ public class Main {
 	private static final int ATTACK_MODE = 1;
 	private static final int SAVE_OPTION = 2;
 	private static final int DELETE_OPTION = 3;
+
+	private static final int HEAL_MODE = 3;
+
+	private static final int ENEMY_ATTACK_CHANCE = 50;
+	private static final int ENEMY_HIT_CHANCE = 75;
+	private static final int FRIEND_DEATH_CHANCE = 60;
+	private static final int ENEMY_SPAWN_CHANCE = 75;
+
+	private static final int ROUNDS_WITHOUT_DEFENDING_LIMIT = 2;
+	private static final int ROUNDS_WITHOUT_KILLING_LIMIT = 3;
+
 	private static final String FILE_PATH = "savegame.dat";
 
 	static GameStorage storage;
@@ -39,12 +51,33 @@ public class Main {
 
 		do {
 			System.out.println("Número de amigos: " + targetsRepo.friendCount() + "\n" + "Número de enemigos: "
-					+ targetsRepo.enemyCount() + "\n");
+					+ targetsRepo.enemyCount() + "\n" + "\nImpactos: " + hero.getHits() + "/3\n");
 			targetsRepo.showTargets();
 
 			gameMode = startGame();
 
-			heroActsOnCharacter(gameMode == ATTACK_MODE);
+			int killsBefore = hero.getKillCount();
+			int defendsBefore = hero.getDefendCount();
+
+			if (gameMode == HEAL_MODE) {
+				hero.heal();
+			} else {
+				heroActsOnCharacter(gameMode == ATTACK_MODE);
+			}
+
+			hero.registerRound(hero.getKillCount() > killsBefore, hero.getDefendCount() > defendsBefore);
+
+			enemyAttackPhase();
+
+			if (hero.isDead()) {
+				System.out.println("Has recibido demasiados impactos. GAME OVER, " + hero.getName());
+				storage.delete();
+				break;
+			}
+			
+			if (targetsRepo.enemyCount() > 0) {
+				applyRoundRules();
+			}
 
 			if (targetsRepo.friendCount() == 0) {
 				System.out.println("Te has cargado a todos tus amigos. GAME OVER, " + hero.getName());
@@ -105,17 +138,17 @@ public class Main {
 		String answer;
 
 		while (true) {
-			System.out.println("¿Atacar a un enemigo o defender a un amigo?\n"
-					+ "(Atacar: introducir '1'. Defender: introducir '2'.)");
+			System.out.println("¿Qué quieres hacer?\n" + "1. Atacar a un enemigo.\n" + "2. Defender a un amigo.\n"
+					+ "3. Curarte.");
+
 			System.out.print("Tu respuesta: ");
 
 			answer = scanner.nextLine().trim();
 
-			if (answer.equals("1") || answer.equals("2")) {
+			if (answer.equals("1") || answer.equals("2") || answer.equals("3")) {
 				return Integer.parseInt(answer);
 			}
-
-			System.out.println("ERROR: Tu respuesta debe ser 1 o 2.");
+			System.out.println("ERROR: Tu respuesta debe ser 1, 2 o 3.");
 		}
 	}
 
@@ -145,6 +178,20 @@ public class Main {
 		}
 	}
 
+	private static void enemyAttackPhase() {
+		if (targetsRepo.enemyCount() == 0 || !Chance.roll(ENEMY_ATTACK_CHANCE)) {
+			return;
+		}
+
+		System.out.println("¡Un enemigo te ataca!");
+
+		if (Chance.roll(ENEMY_HIT_CHANCE)) {
+			hero.receiveHit();
+		} else {
+			System.out.println("...pero falla.");
+		}
+	}
+
 	private static int askEndOfRoundOption() {
 		while (true) {
 			System.out.print("Final de ronda.\n" + "1. Seguir jugando.\n" + "2. Guardar partida y dejar de jugar.\n"
@@ -157,6 +204,18 @@ public class Main {
 			}
 
 			System.out.println("ERROR: Escoge una opción válida.");
+		}
+	}
+
+	private static void applyRoundRules() {
+		if (hero.getRoundsWithoutDefending() > ROUNDS_WITHOUT_DEFENDING_LIMIT && Chance.roll(FRIEND_DEATH_CHANCE)) {
+			targetsRepo.removeRandomFriend();
+			System.out.println("Por no defender a tus amigos, uno de ellos ha muerto.");
+		}
+
+		if (hero.getRoundsWithoutKilling() > ROUNDS_WITHOUT_KILLING_LIMIT && Chance.roll(ENEMY_SPAWN_CHANCE)) {
+			targetsRepo.addEnemy();
+			System.out.println("Por no matar enemigos, ha aparecido uno nuevo.");
 		}
 	}
 
